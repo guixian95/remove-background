@@ -15,32 +15,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 
-type OAuthProvider = 'google' | 'github' | 'wechat'
-
-function WeChatIcon({ className }: { className?: string }) {
-  return (
-    <svg
-      aria-hidden="true"
-      className={className}
-      fill="none"
-      viewBox="0 0 24 24"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M8.5 4.5C4.91 4.5 2 6.93 2 9.93c0 1.72.95 3.26 2.43 4.27L4 17.5l3.17-1.59c.43.07.88.1 1.33.1.18 0 .35-.01.52-.02-.34-.65-.52-1.38-.52-2.15 0-2.93 2.72-5.33 6.06-5.48C13.5 6.08 11.18 4.5 8.5 4.5Z"
-        fill="currentColor"
-      />
-      <path
-        d="M16.07 9.5c-3.28 0-5.93 2.16-5.93 4.83 0 1.45.79 2.75 2.04 3.64L11.7 21l2.71-1.35c.54.11 1.1.18 1.66.18 3.27 0 5.93-2.17 5.93-4.84 0-2.66-2.66-4.82-5.93-4.82Z"
-        fill="currentColor"
-      />
-      <circle cx="6.88" cy="9.37" fill="white" r="0.88" />
-      <circle cx="10.12" cy="9.37" fill="white" r="0.88" />
-      <circle cx="14.47" cy="13.72" fill="white" r="0.82" />
-      <circle cx="17.68" cy="13.72" fill="white" r="0.82" />
-    </svg>
-  )
-}
+type OAuthProvider = 'google' | 'github'
 
 export default function Page() {
   const [email, setEmail] = useState('')
@@ -89,9 +64,7 @@ export default function Page() {
 
     try {
       const { data, error } = await supabase.auth.signInWithOAuth({
-        // Supabase supports WeChat, but this project's installed auth types lag behind.
-        provider:
-          provider as Parameters<typeof supabase.auth.signInWithOAuth>[0]['provider'],
+        provider,
         options: {
           redirectTo:
             process.env.NEXT_PUBLIC_DEV_SUPABASE_REDIRECT_URL ||
@@ -189,15 +162,6 @@ export default function Page() {
                   disabled={oAuthLoading === 'github'}
                 >
                   {oAuthLoading === 'github' ? 'Signing up...' : 'GitHub'}
-                </Button>
-                <Button
-                  type="button"
-                  variant="outline"
-                  onClick={() => handleOAuthSignUp('wechat')}
-                  disabled={oAuthLoading === 'wechat'}
-                >
-                  <WeChatIcon className="size-4" />
-                  {oAuthLoading === 'wechat' ? 'Signing up...' : 'WeChat'}
                 </Button>
               </div>
 
