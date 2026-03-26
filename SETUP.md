@@ -27,7 +27,7 @@ This project includes full authentication and payment integration with Supabase 
 
 ### Supabase
 ```
-NEXT_PUBLIC_SB_SUPABASE_URL=<your-supabase-url>
+NEXT_PUBLIC_SUPABASE_URL=<your-supabase-url>
 NEXT_PUBLIC_SB_SUPABASE_ANON_KEY=<your-supabase-anon-key>
 ```
 

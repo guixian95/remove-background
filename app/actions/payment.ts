@@ -9,7 +9,7 @@ import { createClient } from '@/lib/supabase/server'
 type PaymentStatus = 'succeeded' | 'pending' | 'failed'
 
 function createAdminClient() {
-  const supabaseUrl = process.env.NEXT_PUBLIC_SB_SUPABASE_URL
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
   const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY
 
   if (!supabaseUrl || !serviceRoleKey) {
