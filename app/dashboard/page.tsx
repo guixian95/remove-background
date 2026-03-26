@@ -150,6 +150,7 @@ export default async function DashboardPage() {
                     <TableHead>Product</TableHead>
                     <TableHead>Amount</TableHead>
                     <TableHead>Status</TableHead>
+                    <TableHead>Order ID</TableHead>
                     <TableHead>Date</TableHead>
                   </TableRow>
                 </TableHeader>
@@ -172,6 +173,9 @@ export default async function DashboardPage() {
                         >
                           {payment.status}
                         </Badge>
+                      </TableCell>
+                      <TableCell className="font-mono text-xs">
+                        {payment.stripe_checkout_session_id || '-'}
                       </TableCell>
                       <TableCell>
                         {new Date(payment.created_at).toLocaleDateString()}
